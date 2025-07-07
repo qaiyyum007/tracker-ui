@@ -29,7 +29,7 @@ import {
   SplitButtonComponent,
   SplitButtonCustomMessagesComponent,
   SplitButtonModule
-} from "./chunk-KBMEKLF4.js";
+} from "./chunk-RFPOWLAR.js";
 import {
   ToggleButtonTabStopDirective
 } from "./chunk-THOT5VRV.js";

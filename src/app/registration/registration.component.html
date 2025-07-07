@@ -1,47 +1,89 @@
-<div class="registration-container" >
-
+<div class="registration-container">
   <div class="form-section" class="form-container">
     <h1 class="form-title">Personal Portfolio Tracker</h1>
 
-    <form [formGroup]="userdataForm" (ngSubmit)="submit()" enctype="multipart/form-data">
-<h2 class="form-title">Registration</h2>
+    <form
+      [formGroup]="userdataForm"
+      (ngSubmit)="submit()"
+      enctype="multipart/form-data"
+    >
+      <h2 class="form-title">Registration</h2>
 
       <label for="firstName">First Name <span class="required">*</span></label>
-      <input id="firstName" formControlName="firstName"type="text" />
-      <div *ngIf="firstName?.invalid && firstName?.touched" class="error">Enter first name</div>
+      <input id="firstName" formControlName="firstName" type="text" />
+      <div *ngIf="firstName?.touched && firstName?.errors">
+        <div *ngIf="firstName?.errors?.['required']">
+          First name is required
+        </div>
+        <div *ngIf="firstName?.errors?.['pattern']">Only letters allowed</div>
+      </div>
 
       <label for="lastName">Last Name <span class="required">*</span></label>
       <input id="lastName" formControlName="lastName" type="text" />
-      <div *ngIf="lastName?.invalid && lastName?.touched" class="error">Enter last name</div>
+      <div *ngIf="lastName?.touched && lastName?.errors">
+        <div *ngIf="lastName?.errors?.['required']">Last name is required</div>
+        <div *ngIf="lastName?.errors?.['pattern']">Only letters allowed</div>
+      </div>
 
       <label for="email">Email <span class="required">*</span></label>
       <input id="email" formControlName="email" type="email" />
-      <div *ngIf="email?.hasError('required') && email?.touched" class="error">Email is required</div>
-      <div *ngIf="email?.hasError('email') && email?.touched" class="error">Enter a valid email</div>
-      <div *ngIf="email?.hasError('emailTaken') && email?.touched" class="error">This email is already registered</div>
+      <div *ngIf="email?.hasError('required') && email?.touched" class="error">
+        Email is required
+      </div>
+      <div *ngIf="email?.hasError('email') && email?.touched" class="error">
+        Enter a valid email
+      </div>
+      <div
+        *ngIf="email?.hasError('emailTaken') && email?.touched"
+        class="error"
+      >
+        This email is already registered
+      </div>
 
       <label for="password">Password <span class="required">*</span></label>
       <input id="password" formControlName="password" type="password" />
-      <div *ngIf="password?.invalid && password?.touched" class="error">Password must be at least 6 characters</div>
+      <div *ngIf="password?.invalid && password?.touched" class="error">
+        Password must be at least 6 characters
+      </div>
 
       <label for="mobile">Mobile <span class="required">*</span></label>
       <input id="mobile" formControlName="mobile" maxlength="10" type="text" />
-      <div *ngIf="mobile?.invalid && (mobile?.touched || mobile?.dirty)" class="error">
-        <div *ngIf="mobile?.errors?.['required']">Mobile number is required</div>
-        <div *ngIf="mobile?.errors?.['pattern']">Only numeric digits are allowed</div>
+      <div
+        *ngIf="mobile?.invalid && (mobile?.touched || mobile?.dirty)"
+        class="error"
+      >
+        <div *ngIf="mobile?.errors?.['required']">
+          Mobile number is required
+        </div>
+        <div *ngIf="mobile?.errors?.['pattern']">
+          Only numeric digits are allowed
+        </div>
       </div>
 
       <label for="dob">Date of Birth <span class="required">*</span></label>
       <input id="dob" formControlName="dob" type="date" />
-      
-      <div *ngIf="dob?.errors?.['ageInvalid'] && dob?.touched" class="error">Must be 18 or older</div>
 
-      <label for="profileImage">Profile Image <span class="required">*</span></label>
-      <input id="profileImage" type="file" accept="image/*" (change)="onFileChange($event)" />
-      <div *ngIf="profileImage?.errors?.['invalidType']" class="error">Only image files are allowed</div>
+      <div *ngIf="dob?.errors?.['ageInvalid'] && dob?.touched" class="error">
+        Must be 18 or older
+      </div>
+
+      <label for="profileImage"
+        >Profile Image <span class="required">*</span></label
+      >
+      <input
+        id="profileImage"
+        type="file"
+        accept="image/*"
+        (change)="onFileChange($event)"
+      />
+      <div *ngIf="profileImage?.errors?.['invalidType']" class="error">
+        Only image files are allowed
+      </div>
 
       <button type="submit" [disabled]="userdataForm.invalid">Register</button>
-      <button type="button" (click)="goToLogin()" class="login-btn">Already have an account? Login</button>
+      <button type="button" (click)="goToLogin()" class="login-btn">
+        Already have an account? Login
+      </button>
     </form>
   </div>
 </div>
