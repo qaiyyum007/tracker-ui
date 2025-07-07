@@ -12,17 +12,17 @@
       <label for="firstName">First Name <span class="required">*</span></label>
       <input id="firstName" formControlName="firstName" type="text" />
       <div *ngIf="firstName?.touched && firstName?.errors">
-        <div *ngIf="firstName?.errors?.['required']">
+        <div *ngIf="firstName?.errors?.['required']" class="error">
           First name is required
         </div>
-        <div *ngIf="firstName?.errors?.['pattern']">Only letters allowed</div>
+        <div *ngIf="firstName?.errors?.['pattern']" class="error">Only letters allowed</div>
       </div>
 
       <label for="lastName">Last Name <span class="required">*</span></label>
       <input id="lastName" formControlName="lastName" type="text" />
       <div *ngIf="lastName?.touched && lastName?.errors">
-        <div *ngIf="lastName?.errors?.['required']">Last name is required</div>
-        <div *ngIf="lastName?.errors?.['pattern']">Only letters allowed</div>
+        <div *ngIf="lastName?.errors?.['required']" class="error">Last name is required</div>
+        <div *ngIf="lastName?.errors?.['pattern']" class="error">Only letters allowed</div>
       </div>
 
       <label for="email">Email <span class="required">*</span></label>
