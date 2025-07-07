@@ -1,0 +1,45 @@
+<header class="header-container">
+  <div class="header-title">Personal Tracker</div>
+
+  <div class="hamburger" (click)="toggleMenu()" tabindex="0">
+    &#9776;
+  </div>
+
+  <div class="profile-container" tabindex="0" (click)="toggleMenu()">
+    <div class="profile-initials">
+      {{ initials() }}
+    </div>
+
+    <div *ngIf="menuOpen()" class="dropdown-menu">
+      <div class="dropdown-header">
+        <div class="profile-header">
+          <div class="image-wrapper">
+            <img
+              *ngIf="user()?.profileImage"
+              [src]="encodeImageUrl(user().profileImage)"
+              alt="Profile"
+              class="profile-image"
+            />
+          </div>
+        </div>
+
+        <div *ngIf="!user().profileImage" class="profile-fallback">
+          {{ initials() }}
+        </div>
+
+        <div class="user-info">
+          <div class="user-name">
+            {{ user().firstName + " " + user().lastName | uppercase }}
+          </div>
+          <div class="user-email">{{ user().email }}</div>
+          <div>DOB: {{ user().dob | date: 'mediumDate' }}</div>
+          <div class="user-dob">Mobile: {{ user().mobile }}</div>
+        </div>
+      </div>
+
+      <div class="logout-container">
+        <button (click)="logout()" class="logout-button">🔓 Logout</button>
+      </div>
+    </div>
+  </div>
+</header>

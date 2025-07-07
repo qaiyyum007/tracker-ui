@@ -1,0 +1,130 @@
+.graph-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.tenure-switcher {
+  margin-bottom: 1rem;
+}
+
+.tenure-switcher button {
+  margin-right: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+
+.tenure-switcher button.active {
+  background: #1c1c7c;
+  color: #fff;
+}
+
+
+.chart-wrapper {
+  max-width: 100%;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.tenure-tabs button.active {
+  background-color: #1e1e75;
+  color: white;
+  border-color: #1e1e75;
+}
+
+.chart-wrapper {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  padding: 1rem;
+}
+
+.tenure-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #e5e7eb;
+  color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #1e3a8a;
+  color: white;
+  font-weight: 600;
+}
+
+
+.summary-box {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+.chart-container {
+  width: 100%;       /* or a fixed width like 1200px */
+  max-width: 1200px; /* controls max width */
+  margin: 0 auto;    /* center align */
+}
+
+.portfolio-modal {
+  background-color: white;
+  padding: 40px;               /* Increase inner spacing */
+  border-radius: 12px;
+  width: 90vw;                 /* Make it wider */
+  max-width: 1000px;           /* Set max width */
+  margin: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+::ng-deep .portfolio-modal {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+:host ::ng-deep .portfolio-modal {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 300;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+
+
+::ng-deep .modal-close{
+    background-color: #722121;
+
+}
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+
+
+<div class="tenure-tabs">
+  <button *ngFor="let tenure of tenures"
+          class="tab"
+          [class.active]="selectedTenure() === tenure"
+          (click)="switchTenure(tenure)">
+    {{ tenure }}
+  </button>
+</div>
+
+
+
+<div class="portfolio-modal">
+ <apx-chart
+  width="100%"
+  height="350"
+  [series]="chartSeries()"
+  [chart]="chartDetails"
+  [colors]="chartColors"
+  [xaxis]="xaxis"
+  [yaxis]="yaxis"
+  [dataLabels]="dataLabels"
+  [stroke]="stroke"
+  [fill]="fill"
+  [tooltip]="tooltip"
+  [legend]="legend">
+</apx-chart>
+<div class="summary-box">
+  <div><strong>Equity:</strong> ₹ {{ summaryValues().equity | number }}</div>
+  <div><strong>Debt:</strong> ₹ {{ summaryValues().debt | number }}</div>
+  <div><strong>Commodity:</strong> ₹ {{ summaryValues().commodity | number }}</div>
+</div>
+
+</div>
+
+
+
+
+

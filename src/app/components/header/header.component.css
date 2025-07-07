@@ -1,0 +1,160 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: #000;
+  color: white;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-container {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile-initials {
+  background-color: #555;
+  color: white;
+  border-radius: 50%;
+  padding: 0.5rem 0.8rem;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  width: 260px;
+  padding: 1rem;
+  margin-top: 0.25rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+.hamburger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+
+.user-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.user-email,
+.user-dob {
+  margin: 0.2rem 0;
+}
+
+.profile-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logout-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: 0;
+    left: 0;
+    border-radius: 0;
+    top: 100%;
+    margin-top: 0;
+  }
+
+  .header-container {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+.profile-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
