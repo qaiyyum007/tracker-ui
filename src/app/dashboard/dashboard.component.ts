@@ -44,6 +44,8 @@ export class DashboardComponent {
     this.showPortfolio = false;
   }
 
+
+
   togglePortfolio() {
     this.showPortfolio = !this.showPortfolio;
   }
@@ -61,16 +63,9 @@ this.user.set(response.user);
   }
 }
 
-
-
-
-
-
 encodeImageUrl(filename: string): string {
   return `http://localhost:3000/uploads/profile/${filename}`;
 }
-
-
 
 
 

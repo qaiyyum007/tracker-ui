@@ -1,4 +1,11 @@
-import { Component, signal, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  signal,
+  ViewEncapsulation,
+  inject,
+  OnInit,
+  computed
+} from '@angular/core';
 import { ChartModule } from '@progress/kendo-angular-charts';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { ButtonModule } from '@progress/kendo-angular-buttons';
@@ -17,9 +24,10 @@ import {
   ApexYAxis,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { PortfolioDummyData } from './portfolio-dummy-data';
+import { firstValueFrom, Observable } from 'rxjs';
+import { PortfolioChartResponse, PortfolioService } from '../../service/portfolio.service';
+import { TenureType } from './portfolio-dummy-data';
 
-type TenureType = 'Daily' | 'Weekly' | 'Monthly' | 'Quarterly' | 'Yearly';
 
 @Component({
   selector: 'app-port-folio',
@@ -35,10 +43,11 @@ type TenureType = 'Daily' | 'Weekly' | 'Monthly' | 'Quarterly' | 'Yearly';
   ],
   templateUrl: './port-folio.component.html',
   styleUrl: './port-folio.component.css',
-   encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
-export class PortFolioComponent {
+export class PortFolioComponent implements OnInit {
+  private portfolioService = inject(PortfolioService);
+
   tenures: TenureType[] = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly'];
   selectedTenure = signal<TenureType>('Daily');
 
@@ -48,7 +57,7 @@ export class PortFolioComponent {
   chartDetails: ApexChart = {
     type: 'area',
     height: 450,
-    width: 900, 
+    width: 800,
     stacked: true,
     toolbar: { show: true },
     foreColor: '#333',
@@ -99,7 +108,7 @@ export class PortFolioComponent {
     },
   };
 
-  constructor() {
+  ngOnInit(): void {
     this.loadChartData(this.selectedTenure());
   }
 
@@ -108,23 +117,54 @@ export class PortFolioComponent {
     this.loadChartData(tenure);
   }
 
-  loadChartData(tenure: TenureType) {
-    const { labels, series } = PortfolioDummyData[tenure];
 
-    const transformedSeries = series.map((s) => ({
-      name: s.name,
-      data: labels.map((date, index) => ({
-        x: new Date(date).getTime(),
-        y: s.data[index],
-      })),
-    }));
 
-    this.summaryValues.set({
-      equity: series[0].data.at(-1) || 0,
-      debt: series[1].data.at(-1) || 0,
-      commodity: series[2].data.at(-1) || 0,
-    });
+async loadChartData(tenure: TenureType): Promise<void> {
+  try {
+    const data = await this.fetchDataByTenure(tenure);
+
+    const transformedSeries = this.transformChartSeries(data.labels, data.series);
+    const summary = this.updateSummaryValues(data.series);
 
     this.chartSeries.set(transformedSeries);
+    this.summaryValues.set(summary);
+  } catch (error) {
+    console.error('Error loading chart data:', error);
   }
+}
+
+
+
+
+private async fetchDataByTenure(tenure: TenureType): Promise<PortfolioChartResponse> {
+  return await firstValueFrom(this.portfolioService.getPortfolioData(tenure));
+}
+
+
+private transformChartSeries(
+  labels: string[],
+  series: { name: string; data: number[] }[]
+): ApexAxisChartSeries {
+  return series.map((s) => ({
+    name: s.name,
+    data: labels.map((date, index) => ({
+      x: new Date(date).getTime(),
+      y: s.data[index],
+    })),
+  }));
+}
+
+private updateSummaryValues(series: { name: string; data: number[] }[]): {
+  equity: number;
+  debt: number;
+  commodity: number;
+} {
+  return {
+    equity: series[0]?.data.at(-1) || 0,
+    debt: series[1]?.data.at(-1) || 0,
+    commodity: series[2]?.data.at(-1) || 0,
+  };
+}
+
+
 }
